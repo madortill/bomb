@@ -1,0 +1,365 @@
+@font-face {
+    font-family: Assistant;
+    src: url("assets/fonts/Alef-Bold.ttf");
+}
+
+@font-face {
+    font-family: OrBitron;
+    src: url("assets/fonts/Orbitron-VariableFont_wght.ttf");
+}
+
+html {
+    margin: 0;
+    width: 100vw;
+    height: 100vh;
+}
+
+body {
+    background-image: url("assets/media/background.svg");
+    background-size: 100% 100%;
+    width: 100%;
+    height: 100%;
+    margin: 0;
+    font-family: "Assistant";
+    color: black;
+    direction: rtl;
+    overflow: hidden;
+    user-select: none;
+}
+
+.bg {
+    background-image: url("assets/media/metal_thing.svg");
+    width: 145vh;
+    height: 35vw;
+    background-size: 100% 100%;
+    position: absolute;
+    left: 50%;
+    top: 40%;
+    transform: translate(-50%, -50%);
+}
+
+.header {
+    font-size: 3vw;
+    text-align: center;
+    width: 50vw;
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    top: 12%;
+}
+
+.questions {
+    display: flex;
+    position: absolute;
+    left: 60%;
+    width: 15vw;
+    height: 40vh;
+    top: 32vh;
+    flex-direction: column;
+    justify-content: space-evenly;
+}
+
+.question {
+    font-size: 2vw;
+}
+
+.radio-btns {
+    display: flex;
+    width: 20vw;
+    height: auto;
+    position: absolute;
+    top: 58vh;
+    left: 50%;
+    transform: translateX(-50%);
+}
+
+#blue {
+    background-image: url("assets/media/blue_battery.svg");
+}
+
+#red {
+    background-image: url("assets/media/red_battery.svg");
+}
+
+#yellow {
+    background-image: url("assets/media/yellow_battery.svg");
+}
+
+.radio-color {
+    font-size: 2vw;
+    padding: 1vh 1vw;
+    border-width: 0.5px;
+    width: 14vw;
+    height: 10vh;
+    background-size: 100% 100%;
+    cursor: pointer;
+}
+
+.radio-color:hover {
+    filter: drop-shadow(0.1vw 0.11vh 0.2vw black);
+    
+}
+
+.radioChosen {
+    background-size: 100% 100%;
+    font-size: 2vw;
+    padding: 1vh 1vw;
+    border-width: 0.5px;
+    width: 14vw;
+    height: 10vh;
+}
+
+.input-protect {
+    position: absolute;
+    height: 6vh;
+    width: 15vw;
+    top: 38vh;
+    left: 50%;
+    transform: translateX(-50%);
+    font-family: "Assistant";
+    font-size: 2vw;
+    z-index: 3;
+}
+
+.check-btn {
+    width: 13vw;
+    background-image: url("assets/media/check_red.svg");
+    background-size: 100% 100%;
+    background-repeat: no-repeat;
+    height: 12vh;
+    position: absolute;
+    top: 80%;
+    left: 50%;
+    transform: translateX(-50%);
+    cursor: pointer;
+    border-color: transparent;
+    background-color: transparent;
+}
+
+.try-again {
+    background-color: rgba(255, 255, 255, 0.8);
+    border-radius: 20px;
+    color: rgb(255, 140, 0);
+    font-size: 6vw;
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    width: 30vw;
+    transform: translate(-50%, -50%);
+    text-align: center;
+    padding-top: 15vh;
+    padding-bottom: 15vh;
+    display: none;
+    z-index: 3;
+}
+
+.riddle {
+    background-image: url("assets/media/metal_thing.svg");
+    border-radius: 20px;
+    width: 75vw;
+    height: 80vh;
+    text-align: center;
+    left: 50%;
+    top: 50%;
+    position: absolute;
+    transform: translate(-50%, -50%);
+    display: none;
+    z-index: 7;
+    justify-content: s;
+}
+
+.close-try-again {
+    color: rgb(255, 140, 0);
+    font-size: 3vw;
+    position: absolute;
+    top: 5%;
+    right: 5%;
+    cursor: pointer;
+}
+
+.all-items {
+    position: absolute;
+    display: flex;
+    width: 40vw;
+    top: 48vh;
+    left: 42%;
+    transform: translateX(-50%);
+    justify-content: space-around;
+    z-index: 2;
+}
+
+#bomb-screen {
+    display: none;
+}
+
+.cord {
+    width: 50vw;
+    height: 90vh;
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    background-repeat: no-repeat;
+}
+
+#cord1 {
+    z-index: 6;
+    cursor: pointer;
+    background-image: url("assets/media/bomb_1.svg");
+}
+
+#cord2 {
+    z-index: 5;
+}
+
+#cord3 {
+    z-index: 4;
+}
+
+#cord4 {
+    z-index: 3;
+}
+
+#cord5 {
+    z-index: 2;
+}
+
+.disabled {
+    cursor: auto;
+}
+
+.active {
+    cursor: pointer;
+}
+
+#quiz-screen {
+    display: none;
+}
+
+.circle {
+    background-image: url("assets/media/gray_checkbox.svg");
+    width: 6vw;
+    height: 7vh;
+    position: relative;
+    z-index: 11;
+    background-repeat: no-repeat;
+}
+
+.circle:hover {
+    filter: contrast(150%);
+    cursor: pointer;
+}
+
+.circle-clicked {
+    background-image: url("assets/media/blue_checkbox.svg");
+    cursor: pointer;
+}
+
+.allriddles {
+    z-index: 7;
+    position: absolute;
+}
+
+.circles {
+    position: absolute;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    height: 40vh;
+    width: 6vw;
+    top: 12vh;
+    right: 7vw;
+}
+
+.answers {
+    position: absolute;
+    right: 16vw;
+    top: 6vh;
+    display: flex;
+    height: 52vh;
+    flex-direction: column;
+    justify-content: space-evenly;
+}
+
+.answer {
+    color: black;
+}
+
+.try {
+    display: none;
+}
+
+.timer {
+    font-family: "OrBitron";
+    direction: ltr;
+    color: red;
+    position: absolute;
+    font-size: 2vw;
+    left: 51vw;
+    top: 39vh;
+    font-size: 3.5vw;
+    z-index: 7;
+    display: none;
+}
+
+/* .bomb {
+    background-image: url("assets/media/bomb_1.svg");
+    width: 50vw;
+    height: 90vh;
+    background-repeat: no-repeat;
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+} */
+
+.fadeIn {
+    animation: fadeInAni 2s forwards;
+}
+
+.fadeOut {
+    animation: fadeOutAni 2s forwards;
+}
+
+@keyframes fadeOutAni {
+    100% {
+        opacity: 0;
+    }
+}
+
+@keyframes fadeInAni {
+    0% {
+        opacity: 0;
+    }
+    100% {
+        opacity: 1;
+    }
+}
+
+@keyframes popIn {
+    0% {
+        top: 200vh;
+    }
+    100% {
+        top: 50%;
+    }
+}
+
+@keyframes popOut {
+    100% {
+        top: 200vh;
+    }
+}
+
+.start-btn {
+    background-image: url("assets/media/start_game.svg");
+    width: 30vw;
+    height: 75vh;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-repeat: no-repeat;
+    cursor: pointer;
+    background-size: auto;
+}
