@@ -56,7 +56,6 @@ const addContentToQuestion = () => {
             let ansFalse = El("div", {classes: [`binaryAns2`, `ans`] ,}, "לא נכון");
             let boxTrue = El("div", {classes: [`true-box`, `true`, `box`] , listeners: {click : onClickAnswer}},);
             let boxFalse = El("div", {classes: [`false-box`, `false`, `box`] , listeners: {click : onClickAnswer}},);
-            // console.log(document.querySelector(`.binaryAns1`));
             document.querySelector(`.multipleQuestionContainer`).append(ansContainer);
             document.querySelector(`.ansContainer`).append(ansTrue);
             document.querySelector(`.ansContainer`).append(ansFalse);
@@ -130,13 +129,13 @@ Description: checks if pic has a larger width than height*/
 
 const imgSize = (img) => {
     // img 
-    if (img.offsetWidth >= img.offsetHeight) {
+    // if (img.offsetWidth >= img.offsetHeight) {
         console.log(img.offsetWidth);
         console.log(img.offsetHeight);
-    }
+    // }
 }
 
-/* onClickAnswer
+/* onClickAnswer hi
 --------------------------------------------------------------
 Description: */
 const onClickAnswer = (event) => {
@@ -148,10 +147,7 @@ const onClickAnswer = (event) => {
     event.currentTarget.style.backgroundImage = "url('assets/media/blue_checkbox.svg')";
     document.querySelector(`.checkButtonSentence`).addEventListener("click", checkAnswer);
     if(arrThisLomdaData[nMultipleCurrentQuestion].type.includes("completeSentence")) {
-        console.log(strCurrentAns.substring(3, 4));
-        console.log(strCurrentAns);
         document.querySelector(`.currAnswerContainer`).innerText = arrThisLomdaData[nMultipleCurrentQuestion].dropDownAns[strCurrentAns.substring(3, 4)];
-
     }
 }
 
@@ -223,6 +219,7 @@ const checkAnswer = () => {
             document.querySelector(`.${e}`).style.backgroundImage = "url('assets/media/red_checkbox.svg')";   
             arrThisLomdaData[nMultipleCurrentQuestion].correctAns.forEach(correctAns => {
                 if (e === `${correctAns}-box`) {
+                    nMultipleCurrentQuestion++;
                     document.querySelector(`.${e}`).style.backgroundImage = "url('assets/media/green_checkbox.svg')";   
                 }
             })
@@ -320,11 +317,8 @@ const checkAnswer = () => {
         } else {      
             if (strCurrentAns === String(arrThisLomdaData[nMultipleCurrentQuestion].correctAns)){
                 nMultipleCorrectAnswers++;
-                if(document.querySelector(`.dropDownTitle`)) {
-                    document.querySelector(`.dropDownTitle`).style.backgroundColor = "green"; 
-                } else {
-                    document.querySelector(`.${strCurrentAns}-box`).style.backgroundImage = "url('assets/media/green_checkbox.svg')";  
-                }
+                document.querySelector(`.${strCurrentAns}-box`).style.backgroundImage = "url('assets/media/green_checkbox.svg')";  
+            
                 nMultipleCurrentQuestion++;
                 strCurrentAns = undefined;
                 setTimeout(() => {

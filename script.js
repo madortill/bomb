@@ -1,46 +1,6 @@
-// document.querySelector("#")
+
 const ANSWERS = ["קסדה", "פלייר", "קאטר", "מברג", "red"];
-// let DATA = [{
-//     type: `multiple`,
-//     question: `שאלה ראשונה`,
-//     ans1: `תשובה1`,
-//     ans2: `תשובה2`,
-//     ans3: `3תשובה`,
-//     ans4: `תשובה4`,
-//     correctAns: `ans1`
-// }, {
-//     type: `multiple`,
-//     question: `שאלה שניה`,
-//     ans1: `תשובה1`,
-//     ans2: `תשובה2`,
-//     ans3: `תשובה3`,
-//     ans4: `תשובה4`,
-//     correctAns: `ans1`
-// }, {
-//     type: `multiple`,
-//     question: `שאלה שלישית`,
-//     ans1: `תשובה1`,
-//     ans2: `תשובה2`,
-//     ans3: `תשובה3`,
-//     ans4: `תשובה4`,
-//     correctAns: `ans1`
-// }, {
-//     type: `multiple`,
-//     question: ``,
-//     ans1: `תשובה1`,
-//     ans2: `תשובה2`,
-//     ans3: `תשובה3`,
-//     ans4: `תשובה4`,
-//     correctAns: `ans1`
-// }, {
-//     type: `multiple`,
-//     question: `שאלה רביעית`,
-//     ans1: `תשובה1`,
-//     ans2: `תשובה2`,
-//     ans3: `תשובה3`,
-//     ans4: `תשובה4`,
-//     correctAns: `ans1`
-// }];
+
 let falseAnswer = false;
 let chosenColor = "";
 let firstChosen = "";
@@ -49,9 +9,21 @@ let thirdChosen = "";
 let cordCounter = 1;
 let isCorrect = false;
 let timerSec = 0;
-let timerMin = 0;
-let timerHour = 1;
+let timerMin = 10;
+let timerHour = 0;
 let timerInterval;
+let imgArry = [
+    "assets/media/bomb_1.svg",
+    "assets/media/bomb_1_glow.svg",
+    "assets/media/bomb_2.svg",
+    "assets/media/bomb_2_glow.svg",
+    "assets/media/bomb_3.svg",
+    "assets/media/bomb_3_glow.svg",
+    "assets/media/bomb_4.svg",
+    "assets/media/bomb_4_glow.svg",
+    "assets/media/bomb_5.svg",
+    "assets/media/bomb_5_glow.svg",
+];
 
 window.addEventListener("load", () => {
     document.getElementById("start-btn").addEventListener("click", beginGame);
@@ -60,42 +32,51 @@ window.addEventListener("load", () => {
     document.getElementById("yellow").addEventListener("click", sendYellow);
     document.getElementById("check-btn").addEventListener("click", checkInputs);
     activeDropDown();
-    // document.getElementById(`cord1`).addEventListener("mouseover", () => {
-    //     document.getElementById("bomb").style.backgroundImage = `url("assets/media/bomb_2.svg")`;
-    // });
-    // document.getElementById(`cord1`).addEventListener("mouseout", () => {
-    //     document.getElementById("bomb").style.backgroundImage = `url("assets/media/bomb_1.svg")`;
-    // });
     document.getElementById(`cord${cordCounter}`).addEventListener("click", activeCords);
-
+    preloadImages(imgArry);
 });
 
+function preloadImages(array) {
+    if (!preloadImages.list) {
+        preloadImages.list = [];
+    }
+    var list = preloadImages.list;
+    for (var i = 0; i < array.length; i++) {
+        var img = new Image();
+        img.onload = function() {
+            var index = list.indexOf(this);
+            if (index !== -1) {
+                // remove image from the array once it's loaded
+                // for memory consumption reasons
+                list.splice(index, 1);
+            }
+        }
+        list.push(img);
+        img.src = array[i];
+    }
+}
+
+  
 const beginGame = () => {
     document.getElementById("quiz-screen").style.display = "block";
     document.getElementById("open-screen").style.display = "none";
-    timerInterval = setInterval(startTimer, 1000);
 }
 
 const startTimer = () => {
-    if(timerHour === 1) {
-        timerHour--;
-        timerMin = 60;
-    }
     if (timerSec === 0) {
         timerSec = 60;
         timerMin--;
     } 
-    if(timerMin === 0) {
+    if(timerMin === 0 && timerSec === 0) {
         clearInterval(timerInterval); 
         alert("time's out!");
     }
     timerSec--;
     if (timerSec <= 9) {
-        document.getElementById("timer").innerText = `${timerHour}:${timerMin}:0${timerSec}`;
+        document.getElementById("timer").innerText = `0${timerHour}:0${timerMin}:0${timerSec}`;
     } else {
-        document.getElementById("timer").innerText = `${timerHour}:${timerMin}:${timerSec}`;
+        document.getElementById("timer").innerText = `0${timerHour}:0${timerMin}:${timerSec}`;
     }
-    
 }
 
 const activeDropDown = () => {
@@ -108,7 +89,6 @@ const activeDropDown = () => {
         document.getElementById(`option${j}`).addEventListener("click", (event) => {
             document.getElementById(`selLabel${Math.ceil(j / 3.0)}`).innerText = event.currentTarget.innerText;
             document.getElementById(`dropdown${Math.ceil(j / 3.0)}`).classList.remove('active');
-            console.log(`option${j}`);
             // if (ANSWERS[Math.ceil(j / 3.0)] !== event.currentTarget.innerText) {
                 if (j <= 3) {
                     firstChosen = event.currentTarget.innerText;
@@ -167,30 +147,22 @@ const checkInputs = () => {
     } else {
         document.getElementById("quiz-screen").style.display = "none";
         document.getElementById("bomb-screen").style.display = "block";
-        document.getElementById("timer").style.display = "block";
-        for (let i = 1; i <= 5; i++) {
-            document.getElementById(`cord${i}`).addEventListener("mouseover", () => {
-                document.getElementById(`cord${i}`).style.backgroundImage = `url("assets/media/bomb_${i}_glow.svg")`;
-            });
-            document.getElementById(`cord${i}`).addEventListener("mouseout", () => {
-                document.getElementById(`cord${i}`).style.backgroundImage = `url("assets/media/bomb_${i}.svg")`;
-            });
-        }
+        document.getElementById("timer").style.display = "flex";
+        document.getElementById(`cord${cordCounter}`).addEventListener("mouseover", () => {
+            document.getElementById(`cord${cordCounter}`).style.backgroundImage = `url("assets/media/bomb_${cordCounter}_glow.svg")`;
+        });
+        document.getElementById(`cord${cordCounter}`).addEventListener("mouseout", () => {
+            document.getElementById(`cord${cordCounter}`).style.backgroundImage = `url("assets/media/bomb_${cordCounter}.svg")`;
+        });
+        document.getElementById("timer").innerText = `0${timerHour}:${timerMin}:0${timerSec}`;
+        setTimeout(() => {
+            timerInterval = setInterval(startTimer, 1000);
+        }, 1500);
     }
 }
 
 const activeCords = () => {
-    // for (let i = 1; i <= 4; i++) {
-    //     document.getElementById(`circle${i}`).classList.remove("circle-clicked");
-    // }
-    // for (let i = 1; i <= 4; i++) {
-    //     document.getElementById(`circle${i}`).addEventListener("click", () => {
-    //         for (let i = 1; i <= 4; i++) {
-    //             document.getElementById(`circle${i}`).classList.remove("circle-clicked");
-    //         }
-    //         document.getElementById(`circle${i}`).classList.toggle("circle-clicked");
-    //     });
-    // }
+    document.getElementById(`cord${cordCounter}`).style.pointerEvents = "none";
     document.getElementById("riddle").style.display = "block";
     document.getElementById(`cord${cordCounter}`).removeEventListener("click", activeCords);
     document.getElementById("riddle").style.animation = "popIn 0.5s ease-out forwards";
@@ -211,49 +183,55 @@ const activeCords = () => {
     // document.getElementById("check-ans").addEventListener("click", checkQuestion);
 }
 
-const checkQuestion = (event) => {
-    if(isCorrect) {
-        // document.getElementById(`cord${cordCounter}`).style.display = "none";
-        if(cordCounter < 5) {
-            cordCounter++;
-            document.getElementById(`cord${cordCounter}`).style.cursor = "pointer";
-            document.getElementById(`cord${cordCounter}`).addEventListener("click", activeCords);
-        }
-        // document.getElementById("riddle").style.display = "none";
-        // document.getElementById(`cord${cordCounter - 1}`).style.display = "none";
-        document.getElementById(`cord${cordCounter}`).style.backgroundImage = `url("assets/media/bomb_${cordCounter}.svg")`;
-        document.getElementById("riddle").style.animation = "popOut 0.5s ease-out forwards";
-        document.getElementById(`cord${cordCounter - 1}`).style.animation = "fadeOutAni 2s forwards";
-        document.getElementById(`cord${cordCounter - 1}`).addEventListener("animationend", () => {
-            document.getElementById(`cord${cordCounter - 1}`).style.display = "none";
-        });
+// const checkQuestion = (event) => {
+//     if(isCorrect) {
+//         // document.getElementById(`cord${cordCounter}`).style.display = "none";
+//         if(cordCounter < 5) {
+//             cordCounter++;
+//             document.getElementById(`cord${cordCounter}`).style.cursor = "pointer";
+//             document.getElementById(`cord${cordCounter}`).addEventListener("click", activeCords);
+//         }
+//         // document.getElementById("riddle").style.display = "none";
+//         // document.getElementById(`cord${cordCounter - 1}`).style.display = "none";
+//         document.getElementById(`cord${cordCounter}`).style.backgroundImage = `url("assets/media/bomb_${cordCounter}.svg")`;
+//         document.getElementById("riddle").style.animation = "popOut 0.5s ease-out forwards";
+//         document.getElementById(`cord${cordCounter - 1}`).style.animation = "fadeOutAni 2s forwards";
+//         document.getElementById(`cord${cordCounter - 1}`).addEventListener("animationend", () => {
+//             document.getElementById(`cord${cordCounter - 1}`).style.display = "none";
+//         });
         
-        // document.getElementById("bomb").addEventListener("animationend", () => {
+//         // document.getElementById("bomb").addEventListener("animationend", () => {
             
-            // document.getElementById("bomb").style.animation = "fadeInAni 1s forwards";
-        // });
-        isCorrect = false;
-    } else {
-        document.getElementById("try").style.display = "block";
-    }
-}
+//             // document.getElementById("bomb").style.animation = "fadeInAni 1s forwards";
+//         // });
+//         isCorrect = false;
+//     } else {
+//         document.getElementById("try").style.display = "block";
+//     }
+// }
 
 const closePopUp = () => {
     if(cordCounter < 5) {
         cordCounter++;
         document.getElementById(`cord${cordCounter}`).style.cursor = "pointer";
         document.getElementById(`cord${cordCounter}`).addEventListener("click", activeCords);
+        // change events listeners
+        document.getElementById(`cord${cordCounter}`).addEventListener("mouseover", () => {
+            document.getElementById(`cord${cordCounter}`).style.backgroundImage = `url("assets/media/bomb_${cordCounter}_glow.svg")`;
+        });
+        document.getElementById(`cord${cordCounter}`).addEventListener("mouseout", () => {
+            document.getElementById(`cord${cordCounter}`).style.backgroundImage = `url("assets/media/bomb_${cordCounter}.svg")`;
+        });
     }
     // document.getElementById("riddle").style.display = "none";
     // document.getElementById(`cord${cordCounter - 1}`).style.display = "none";
-    document.getElementById(`cord${cordCounter - 1}`).removeEventListener;
     document.getElementById(`cord${cordCounter}`).style.backgroundImage = `url("assets/media/bomb_${cordCounter}.svg")`;
      document.getElementById(`cord${cordCounter - 1}`).style.pointerEvents = "none";
     document.getElementById("riddle").style.animation = "popOut 0.5s ease-out forwards";
     document.getElementById(`cord${cordCounter - 1}`).style.animation = "fadeOutAni 2s forwards";
-    // document.getElementById(`cord${cordCounter - 1}`).addEventListener("animationend", () => {
-       
-    // });
+    document.getElementById(`cord${cordCounter - 1}`).addEventListener("animationend", () => {
+        document.getElementById(`cord${cordCounter}`).style.pointerEvents = "auto";
+    });
 }
 
 const checkChosenAnswer = (event) => {

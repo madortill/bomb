@@ -1,76 +1,76 @@
 const DATA = { 
     // multiple and binary questions
     "questions": [
-        // {
-        //     type: `sixChoices`,
-        //     question: `שאלה עם 6 בחירות`,
-        //     ans1: `1תשובה`,
-        //     ans2: `תשובה2`,
-        //     ans3: `תשובה3`,
-        //     ans4: `תשובה4`,
-        //     ans5: `תשובה5`,
-        //     ans6: `תשובה6`,
-        //     correctAns: [`ans1`, `ans2`, `ans5`] // the legth will determine how many answers are reqwiered
-        // },
+        {
+            type: `sixChoices`,
+            question: `שאלה עם 6 בחירות`,
+            ans1: `1תשובה`,
+            ans2: `תשובה2`,
+            ans3: `תשובה3`,
+            ans4: `תשובה4`,
+            ans5: `תשובה5`,
+            ans6: `תשובה6`,
+            correctAns: [`ans1`, `ans2`, `ans5`] // the legth will determine how many answers are reqwiered
+        },
        {
         type: `multipleAllPic`,
             question: `שאלה אמריקאית שהתשובות שלה הן תמונות`,
              answers: [`./assets/panda.jpg`, `./assets/dog.jpg`, `./assets/panda.jpg`, `./assets/dog.jpg`],// the legth will determine how many pics will be im the question, one correct ans
              correctAns: `ans1`
          },
-        // {
-        //      type: `sixChoicesWithPic`,
-        //      src: `./assets/panda.jpg`,
-        //      question: `שאלה עם 6 בחירות ותמונה`,
-        //      ans1: `1תשובה`,
-        //      ans2: `תשובה2`,
-        //      ans3: `תשובה3`,
-        //      ans4: `תשובה4`,
-        //      ans5: `תשובה5`,
-        //      ans6: `תשובה6`,
-        //      correctAns: [`ans1`, `ans2`, `ans5`]
-        //  },
-        //  {
-        //      type: `multiple`,
-        //      question: `שאלהההההההה`,
-        //      ans1: `1תשובה`,
-        //      ans2: `תשובה2`,
-        //      ans3: `תשובה3`,
-        //      ans4: `תשובה4`,
-        //      correctAns: `ans1`
-        //  },
-        //  {
-        //      type: `multipleWithPic`,
-        //      src: `./assets/panda.jpg`,
-        //      question: `שאלzcjxz  dxjjjhg  fkds h.kfhk.sdhbk,vh  fdjf.kdj.fjd. .kdhf kfh.k laf .lf /a lf.al asfj.a sdf/lf `,
-        //      ans1: `1תשובה`,
-        //      ans2: `תשובה2`,
-        //      ans3: `תשובה3`,
-        //      ans4: `תשובה4`,
-        //      correctAns: `ans1`
-        //  },
-        //  {
-        //      type: `binary`, 
-        //      question: `סזבכבסsdfhyidshfl ksh lfhldshflhsldhfls khlfhsldhf lshldfh ldshflhsdlkhflk shdflkhs  lkfhsdl khfldshflk dshlfhsl dkdhflksaf jewjef. kje fjw jkfסססססססס ססס`,
-        //      correctAns: true
-        //  },
-        //  {
-        //      type: `binaryWithPic`,
-        //      src: `./assets/dog.jpg`,
-        //      question: `נכון או לא נכון עם תמונה`,
-        //      correctAns: true
-        //  },
-        //  {
-        //      type: "completeSentence",
-        //      sentence: [`חלק ראשון של המשפט דשךק'ן וכ'כג ךםן'כפן וכ`, `לחדגיכחל ד לדגחכ ידלג כום ךעכדם גכךםכן טםכון כ לך'ךןכ ט'ךקכ  חלק שני של המשפט`], // put each part of the sentence as an string in the array
-        //      dropDownAns: [
-        //          ` ג dfgkhdk gdkf ghd lihdkfg h dfgkg erk hgkdכעג ק עק עע אופציה 1`,
-        //          `אופציה 2ךכל f ghfgt jf ykmj fyhדךןכויד ךןדכ וךכד`,
-        //          `אופציהuy gujg iujgikugh iuhgi uiug iliug lig lihfnb m gkjnh l;rtjy3`,
-        //          `אופצ fjhyfh cdh cx trf ghgfvj g,jhn lk fklיה 4`,
-        //      ], // all the options that will apear in the dropDown.
-        //      correctAns: "ans0" // location of answer in array
-        //  }, 
+        {
+             type: `sixChoicesWithPic`,
+             src: `./assets/panda.jpg`,
+             question: `שאלה עם 6 בחירות ותמונה`,
+             ans1: `1תשובה`,
+             ans2: `תשובה2`,
+             ans3: `תשובה3`,
+             ans4: `תשובה4`,
+             ans5: `תשובה5`,
+             ans6: `תשובה6`,
+             correctAns: [`ans1`, `ans2`, `ans5`]
+         },
+         {
+             type: `multiple`,
+             question: `שאלהההההההה`,
+             ans1: `1תשובה`,
+             ans2: `תשובה2`,
+             ans3: `תשובה3`,
+             ans4: `תשובה4`,
+             correctAns: `ans1`
+         },
+         {
+             type: `multipleWithPic`,
+             src: `./assets/panda.jpg`,
+             question: `שאלzcjxz  dxjjjhg  fkds h.kfhk.sdhbk,vh  fdjf.kdj.fjd. .kdhf kfh.k laf .lf /a lf.al asfj.a sdf/lf `,
+             ans1: `1תשובה`,
+             ans2: `תשובה2`,
+             ans3: `תשובה3`,
+             ans4: `תשובה4`,
+             correctAns: `ans1`
+         },
+         {
+             type: `binary`, 
+             question: `סזבכבסsdfhyidshfl ksh lfhldshflhsldhfls khlfhsldhf lshldfh ldshflhsdlkhflk shdflkhs  lkfhsdl khfldshflk dshlfhsl dkdhflksaf jewjef. kje fjw jkfסססססססס ססס`,
+             correctAns: true
+         },
+         {
+             type: `binaryWithPic`,
+             src: `./assets/dog.jpg`,
+             question: `נכון או לא נכון עם תמונה`,
+             correctAns: true
+         },
+         {
+             type: "completeSentence",
+             sentence: [`חלק ראשון של המשפט דשךק'ן וכ'כג ךםן'כפן וכ`, `לחדגיכחל ד לדגחכ ידלג כום ךעכדם גכךםכן טםכון כ לך'ךןכ ט'ךקכ  חלק שני של המשפט`], // put each part of the sentence as an string in the array
+             dropDownAns: [
+                 ` ג dfgkhdk gdkf ghd lihdkfg h dfgkg erk hgkdכעג ק עק עע אופציה 1`,
+                 `אופציה 2ךכל f ghfgt jf ykmj fyhדךןכויד ךןדכ וךכד`,
+                 `אופציהuy gujg iujgikugh iuhgi uiug iliug lig lihfnb m gkjnh l;rtjy3`,
+                 `אופצ fjhyfh cdh cx trf ghgfvj g,jhn lk fklיה 4`,
+             ], // all the options that will apear in the dropDown.
+             correctAns: "ans0" // location of answer in array
+         }, 
     ],
     // sort to groups
     // "sortToGroups": {
