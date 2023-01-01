@@ -42,6 +42,7 @@ body {
     justify-content: space-evenly;
     align-items: center;
     padding: 6vh 6vw;
+    z-index: 3;
 }
 
 .question-container {
@@ -155,20 +156,26 @@ body {
 }
 
 .try-again {
-    background-color: rgba(255, 255, 255, 0.8);
-    border-radius: 20px;
-    color: rgb(255, 140, 0);
-    font-size: 6vw;
+    background-color: rgba(165, 42, 42, 0.4);
+    width: 100vw;
+    height: 100vh;
+    display: none;
+    z-index: 10;
+    position: fixed;
+}
+
+.try-again-item {
+    background-image: url("assets/media/try_again.svg");
     position: absolute;
     left: 50%;
     top: 50%;
-    width: 30vw;
+    width: 40vw;
+    height: 70vh;
+    background-repeat: no-repeat;
+    background-size: contain;
     transform: translate(-50%, -50%);
     text-align: center;
-    padding-top: 15vh;
-    padding-bottom: 15vh;
-    display: none;
-    z-index: 3;
+    z-index: 10;
 }
 
 .riddle {
@@ -187,7 +194,7 @@ body {
 }
 
 .close-try-again {
-    color: rgb(255, 140, 0);
+    color: white;
     font-size: 3vw;
     position: absolute;
     top: 5%;
