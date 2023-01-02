@@ -17,8 +17,8 @@
 <body>
     <div class="timer" id="timer"></div>
     <div class="try-again" id="try-again">
-        <div class="try-again-item" id="try-again-item"></div>
-        <div class="close-try-again" id="close-try-again">X</div>
+        <img class="try-again-item" id="try-again-item" src="assets/media/try_again.svg"/>
+        <img class="close-try-again" id="close-try-again" src="assets/media/X.svg"/>
     </div>
     <div id="open-screen">
         <div class="start-btn" id="start-btn"></div>
@@ -101,6 +101,11 @@
     </div>
     </div>
     <div id="bomb-screen">
+        <div class="heart-container">
+            <img class="heart" id="heart1" src="assets/media/bomb_balck.svg"/>
+            <img class="heart" id="heart2" src="assets/media/bomb_balck.svg"/>
+            <img class="heart" id="heart3" src="assets/media/bomb_balck.svg"/>
+        </div>
         <div class="bomb" id="bomb"></div>
         <div id="cord1" class="cord"></div>
         <div id="cord2" class="cord"></div>
@@ -112,24 +117,11 @@
             <div class="riddle-text" id="riddle-text"></div>
 
             <div class="multipleQuestionContainer"></div>
-            <div class="allriddles">
-                <!-- <div class="circles">
-                    <div class="riddle-circle1 circle" id="circle1"></div>
-                    <div class="riddle-circle2 circle" id="circle2"></div>
-                    <div class="riddle-circle3 circle" id="circle3"></div>
-                    <div class="riddle-circle4 circle" id="circle4"></div>
-                </div> -->
-                <!-- <div class="answers">
-                    <div class="ans1 answer" id="ans1"></div>
-                    <div class="ans2 answer" id="ans2"></div>
-                    <div class="ans3 answer" id="ans3"></div>
-                    <div class="ans4 answer" id="ans4"></div>                                                                                                                          
-                </div> -->
-            </div>
             <!-- <button class="check-ans" id="check-ans">check</button> -->
             <div class="try" id="try">נסה שוב</div>
         </div>
     </div>
+    <div class="loser-screen"></div>
 </body>
 
 </html>

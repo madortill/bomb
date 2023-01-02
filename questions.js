@@ -3,6 +3,7 @@ let nMultipleCurrentQuestion = 0;
 let nMultipleCorrectAnswers = 0;
 let arrThisLomdaData = shuffle(DATA.questions)
 let strCurrentAns;
+let mistakeCounter = 0;
 
 // const
 const AMOUNT_OF_QUESTION = arrThisLomdaData.length; // how many questions we want out of the array
@@ -213,13 +214,14 @@ Description: */
 const checkAnswer = () => {
     document.querySelector(`.checkButtonSentence`).removeEventListener("click", checkAnswer);
     document.querySelector(`.multipleQuestionContainer`).style.pointerEvents ="none";
-    if (arrThisLomdaData[nMultipleCurrentQuestion].type.includes("sixChoices")) {
+    if (arrThisLomdaData[nMultipleCurrentQuestion].type.includes("sixChoices") || arrThisLomdaData[nMultipleCurrentQuestion].type.includes("sixChoicesWithPic")) {
         // color the answers acordingly
+        console.log(strCurrentAns);
         strCurrentAns.forEach(e => {
             document.querySelector(`.${e}`).style.backgroundImage = "url('assets/media/red_checkbox.svg')";   
             arrThisLomdaData[nMultipleCurrentQuestion].correctAns.forEach(correctAns => {
                 if (e === `${correctAns}-box`) {
-                    nMultipleCurrentQuestion++;
+                    // nMultipleCurrentQuestion++;
                     document.querySelector(`.${e}`).style.backgroundImage = "url('assets/media/green_checkbox.svg')";   
                 }
             })
@@ -242,6 +244,7 @@ const checkAnswer = () => {
                 }
                 }, DELAY_AFTER_QUESTION);
         } else {
+            controlMistakes();
             setTimeout(() => {
                 if(nMultipleCurrentQuestion <  AMOUNT_OF_QUESTION) {
                     addContentToQuestion();
@@ -305,6 +308,7 @@ const checkAnswer = () => {
                 }, DELAY_AFTER_QUESTION);
             } else {
                 document.querySelector(`.${strCurrentAns}`).style.backgroundImage = "url('assets/media/red_checkbox.svg')";
+                controlMistakes();
                 strCurrentAns = undefined;
                 setTimeout(() => {
                     if(nMultipleCurrentQuestion <  AMOUNT_OF_QUESTION) {
@@ -329,6 +333,7 @@ const checkAnswer = () => {
                 }
                 }, DELAY_AFTER_QUESTION);
             } else {
+                controlMistakes();
                 document.querySelector(`.${strCurrentAns}`).style.backgroundImage = "url('assets/media/red_checkbox.svg')";
                 strCurrentAns = undefined;
                 setTimeout(() => {
@@ -343,6 +348,13 @@ const checkAnswer = () => {
     }
 }
 
+const controlMistakes = () => {
+    mistakeCounter++;
+    if(mistakeCounter === 3) {
+        document.querySelector(".loser-screen").style.display = "block";
+    }
+    document.getElementById(`heart${mistakeCounter}`).style.display = "none";
+}
 
 /* questionsEnd
 --------------------------------------------------------------

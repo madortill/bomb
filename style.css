@@ -156,7 +156,7 @@ body {
 }
 
 .try-again {
-    background-color: rgba(165, 42, 42, 0.4);
+    background-color: rgba(165, 42, 42, 0.55);
     width: 100vw;
     height: 100vh;
     display: none;
@@ -165,10 +165,9 @@ body {
 }
 
 .try-again-item {
-    background-image: url("assets/media/try_again.svg");
     position: absolute;
     left: 50%;
-    top: 50%;
+    top: 40%;
     width: 40vw;
     height: 70vh;
     background-repeat: no-repeat;
@@ -194,8 +193,7 @@ body {
 }
 
 .close-try-again {
-    color: white;
-    font-size: 3vw;
+    width: 4vw;
     position: absolute;
     top: 5%;
     right: 5%;
@@ -317,7 +315,7 @@ body {
     direction: rtl;
     color: red;
     position: absolute;
-    left: 50%;
+    left: 100%;
     top: 50%;
     transform: translate(-50%, -50%);
     font-size: 3vw;
@@ -329,7 +327,7 @@ body {
     align-items: flex-start;
     justify-content: flex-start;
     align-content: stretch;
-    flex-direction: column;
+    flex-direction: row-reverse;
     text-align: center;
     pointer-events: none;
 }
@@ -394,4 +392,28 @@ body {
     background-repeat: no-repeat;
     cursor: pointer;
     background-size: auto;
+}
+
+.loser-screen {
+    background-image: url("assets/media/oh_no.svg");
+    width: 100%;
+    height: 100%;
+    display: none;
+    position: fixed;
+    z-index: 20;
+}
+
+.heart {
+    width: 5vw;
+}
+
+.heart-container {
+    display: flex;
+    flex-wrap: nowrap;
+    justify-content: flex-end;
+    align-items: center;
+    width: 15vw;
+    position: absolute;
+    left: 1vw;
+    top: 1vh;
 }
