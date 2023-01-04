@@ -2,16 +2,18 @@
 const ANSWERS = ["קסדה", "פלייר", "קאטר", "מברג", "red"];
 
 let falseAnswer = false;
+let isPopIn = false;
 let chosenColor = "";
 let firstChosen = "";
 let secondChosen = "";
 let thirdChosen = "";
 let cordCounter = 1;
 let isCorrect = false;
-let timerSec = 0;
-let timerMin = 10;
+let timerSec = 2;
+let timerMin = 0;
 let timerHour = 0;
 let timerInterval;
+let timer;
 let imgArry = [
     "assets/media/bomb_1.svg",
     "assets/media/bomb_1_glow.svg",
@@ -26,6 +28,7 @@ let imgArry = [
 ];
 
 window.addEventListener("load", () => {
+    timer = document.getElementById("timer");
     document.getElementById("start-btn").addEventListener("click", beginGame);
     document.getElementById("blue").addEventListener("click", sendBlue);
     document.getElementById("red").addEventListener("click", sendRed);
@@ -64,19 +67,31 @@ const beginGame = () => {
 
 const startTimer = () => {
     if (timerSec === 0) {
-        timerSec = 60;
-        timerMin--;
+        if(timerMin === 0) {
+            clearInterval(timerInterval); 
+            timer.innerText = `00:00:00`;
+            timer.style.animation = "timerFlicker 1s cubic-bezier(0.22, 0.61, 0.36, 1)";
+            timer.addEventListener("animationend", () => {
+                timer.style.display = "none";
+                document.getElementById(`cord${cordCounter}`).style.animation = "shakeScreen 2s linear, zoomScreen 2s linear";
+                document.getElementById("black-screen").style.animation = "blackScreenFlicker 2s linear";
+                // handleEnd(false);
+            });
+        } else {
+            timerSec = 60;
+            timerMin--;
+        }
     } 
-    if(timerMin === 0 && timerSec === 0) {
-        clearInterval(timerInterval); 
-        alert("time's out!");
-    }
+     
     timerSec--;
-    if (timerSec <= 9) {
-        document.getElementById("timer").innerText = `0${timerHour}:0${timerMin}:0${timerSec}`;
-    } else {
-        document.getElementById("timer").innerText = `0${timerHour}:0${timerMin}:${timerSec}`;
+    if (timerSec > -1) {
+        if (timerSec <= 9) {
+            timer.innerText = `0${timerHour}:0${timerMin}:0${timerSec}`;
+        } else {
+            timer.innerText = `0${timerHour}:0${timerMin}:${timerSec}`;
+        }
     }
+    
 }
 
 const activeDropDown = () => {
@@ -147,14 +162,14 @@ const checkInputs = () => {
     } else {
         document.getElementById("quiz-screen").style.display = "none";
         document.getElementById("bomb-screen").style.display = "block";
-        document.getElementById("timer").style.display = "flex";
+        timer.style.display = "block";
         document.getElementById(`cord${cordCounter}`).addEventListener("mouseover", () => {
             document.getElementById(`cord${cordCounter}`).style.backgroundImage = `url("assets/media/bomb_${cordCounter}_glow.svg")`;
         });
         document.getElementById(`cord${cordCounter}`).addEventListener("mouseout", () => {
             document.getElementById(`cord${cordCounter}`).style.backgroundImage = `url("assets/media/bomb_${cordCounter}.svg")`;
         });
-        document.getElementById("timer").innerText = `0${timerHour}:${timerMin}:0${timerSec}`;
+        timer.innerText = `0${timerHour}:${timerMin}:0${timerSec}`;
         setTimeout(() => {
             timerInterval = setInterval(startTimer, 1000);
         }, 1500);
@@ -164,8 +179,9 @@ const checkInputs = () => {
 const activeCords = () => {
     document.getElementById(`cord${cordCounter}`).style.pointerEvents = "none";
     document.getElementById("riddle").style.display = "block";
-    document.getElementById(`cord${cordCounter}`).removeEventListener("click", activeCords);
+    // document.getElementById(`cord${cordCounter}`).removeEventListener("click", activeCords);
     document.getElementById("riddle").style.animation = "popIn 0.5s ease-out forwards";
+    isPopIn = true;
     addContentToQuestion();
     document.getElementById("try").style.display = "none";
     // for(let i = 1; i <= 4; i++) {
@@ -214,7 +230,7 @@ const closePopUp = () => {
     if(cordCounter < 5) {
         cordCounter++;
         document.getElementById(`cord${cordCounter}`).style.cursor = "pointer";
-        document.getElementById(`cord${cordCounter}`).addEventListener("click", activeCords);
+        // document.getElementById(`cord${cordCounter}`).addEventListener("click", activeCords);
         // change events listeners
         document.getElementById(`cord${cordCounter}`).addEventListener("mouseover", () => {
             document.getElementById(`cord${cordCounter}`).style.backgroundImage = `url("assets/media/bomb_${cordCounter}_glow.svg")`;
@@ -226,11 +242,12 @@ const closePopUp = () => {
     // document.getElementById("riddle").style.display = "none";
     // document.getElementById(`cord${cordCounter - 1}`).style.display = "none";
     document.getElementById(`cord${cordCounter}`).style.backgroundImage = `url("assets/media/bomb_${cordCounter}.svg")`;
-     document.getElementById(`cord${cordCounter - 1}`).style.pointerEvents = "none";
+    //  document.getElementById(`cord${cordCounter - 1}`).style.pointerEvents = "none";
     document.getElementById("riddle").style.animation = "popOut 0.5s ease-out forwards";
+    isPopIn = false;
     document.getElementById(`cord${cordCounter - 1}`).style.animation = "fadeOutAni 2s forwards";
     document.getElementById(`cord${cordCounter - 1}`).addEventListener("animationend", () => {
-        document.getElementById(`cord${cordCounter}`).style.pointerEvents = "auto";
+        document.getElementById(`cord${cordCounter - 1}`).style.pointerEvents = "auto";
     });
 }
 

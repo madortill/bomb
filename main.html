@@ -15,7 +15,6 @@
 </head>
 
 <body>
-    <div class="timer" id="timer"></div>
     <div class="try-again" id="try-again">
         <img class="try-again-item" id="try-again-item" src="assets/media/try_again.svg"/>
         <img class="close-try-again" id="close-try-again" src="assets/media/X.svg"/>
@@ -102,11 +101,13 @@
     </div>
     <div id="bomb-screen">
         <div class="heart-container">
-            <img class="heart" id="heart1" src="assets/media/bomb_balck.svg"/>
-            <img class="heart" id="heart2" src="assets/media/bomb_balck.svg"/>
-            <img class="heart" id="heart3" src="assets/media/bomb_balck.svg"/>
+            <img class="heart" id="heart1" src="assets/media/red_heart.svg"/>
+            <img class="heart" id="heart2" src="assets/media/red_heart.svg"/>
+            <img class="heart" id="heart3" src="assets/media/red_heart.svg"/>
         </div>
-        <div class="bomb" id="bomb"></div>
+        <div class="cord" id="cord0">
+            <div class="timer" id="timer"></div>
+        </div>
         <div id="cord1" class="cord"></div>
         <div id="cord2" class="cord"></div>
         <div id="cord3" class="cord"></div>
@@ -121,7 +122,9 @@
             <div class="try" id="try">נסה שוב</div>
         </div>
     </div>
+    <div class="black-screen" id="black-screen"></div>
     <div class="loser-screen"></div>
+    <div class="winner-screen"></div>
 </body>
 
 </html>

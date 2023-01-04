@@ -6,7 +6,7 @@ let strCurrentAns;
 let mistakeCounter = 0;
 
 // const
-const AMOUNT_OF_QUESTION = arrThisLomdaData.length; // how many questions we want out of the array
+const AMOUNT_OF_QUESTION = 5; // how many questions we want out of the array
 const DELAY_AFTER_QUESTION = 2000;
 
 /* addContentToQuestion
@@ -235,12 +235,14 @@ const checkAnswer = () => {
 
         // compare arrays
         if(compareOutOfOrder(strCurrentAns, correctAnsBox)) {
+            console.log(nMultipleCorrectAnswers);
+            nMultipleCurrentQuestion++;
             nMultipleCorrectAnswers++;
             setTimeout(() => {
                 if(nMultipleCurrentQuestion <  AMOUNT_OF_QUESTION) {
                     closePopUp();
                 } else {
-                    questionsEnd();
+                    handleEnd(true);
                 }
                 }, DELAY_AFTER_QUESTION);
         } else {
@@ -249,7 +251,7 @@ const checkAnswer = () => {
                 if(nMultipleCurrentQuestion <  AMOUNT_OF_QUESTION) {
                     addContentToQuestion();
                 } else {
-                    questionsEnd();
+                    handleEnd(true);
                 }
             }, DELAY_AFTER_QUESTION);
         }
@@ -269,7 +271,7 @@ const checkAnswer = () => {
     //             if(nMultipleCurrentQuestion <  AMOUNT_OF_QUESTION) {
     //                     closePopUp();
     //             } else {
-    //                 questionsEnd();
+    //                 handleEnd();
     //             }
     //         }, DELAY_AFTER_QUESTION);
     //     }
@@ -284,7 +286,7 @@ const checkAnswer = () => {
     //         if(nMultipleCurrentQuestion <  AMOUNT_OF_QUESTION) {
     //                 addContentToQuestion();
     //         } else {
-    //             questionsEnd();
+    //             handleEnd();
     //         }
     //     }, DELAY_AFTER_QUESTION);
 
@@ -303,7 +305,7 @@ const checkAnswer = () => {
                 if(nMultipleCurrentQuestion <  AMOUNT_OF_QUESTION) {
                     closePopUp();
                 } else {
-                    questionsEnd();
+                    handleEnd(true);
                 }
                 }, DELAY_AFTER_QUESTION);
             } else {
@@ -314,7 +316,7 @@ const checkAnswer = () => {
                     if(nMultipleCurrentQuestion <  AMOUNT_OF_QUESTION) {
                         addContentToQuestion();
                     } else {
-                        questionsEnd();
+                        handleEnd(true);
                     }
                 }, DELAY_AFTER_QUESTION);
             }
@@ -329,7 +331,7 @@ const checkAnswer = () => {
                 if(nMultipleCurrentQuestion <  AMOUNT_OF_QUESTION) {
                     closePopUp();
                 } else {
-                    questionsEnd();
+                    handleEnd(true);
                 }
                 }, DELAY_AFTER_QUESTION);
             } else {
@@ -340,7 +342,7 @@ const checkAnswer = () => {
                     if(nMultipleCurrentQuestion <  AMOUNT_OF_QUESTION) {
                         addContentToQuestion();
                     } else {
-                        questionsEnd();
+                        handleEnd(true);
                     }
                 }, DELAY_AFTER_QUESTION);
             }
@@ -351,18 +353,24 @@ const checkAnswer = () => {
 const controlMistakes = () => {
     mistakeCounter++;
     if(mistakeCounter === 3) {
-        document.querySelector(".loser-screen").style.display = "block";
+        handleEnd(false);
     }
-    document.getElementById(`heart${mistakeCounter}`).style.display = "none";
+    document.getElementById(`heart${mistakeCounter}`).src = "assets/media/gray_heart.svg";
 }
 
-/* questionsEnd
+/* handleEnd
 --------------------------------------------------------------
 Description:  */
-const questionsEnd = () => {
+const handleEnd = (isWinner) => {
+    console.log("handle");
+    if(isWinner) {
+        document.querySelector(".winner-screen").style.display = "block";
+    } else {
+        document.querySelector(".loser-screen").style.display = "block";
+    }
     console.log("סיימתי");
     console.log(nMultipleCorrectAnswers);
-    closePopUp();
+    
 }
 
 function scaleFontSize(element) {
